@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <title>Youtube検索アプリ</title>
+</head>
+<body>
+    <form method="get" action="">
+        <input type="text" name="query" value="{{ request.GET.query }}">
+        <input type="submit" value="検索！">
+    </form>
+    {% if sample_list.exists %}
+    <table>
+        <tr>
+            <th>タイトル</th>
+            <th>投稿者</th>
+            <th>投稿日時</th>
+        </tr>
+        
+        {% for sample in sample_list %}
+        <tr>
+            <td>{{ sample.title }}</td>
+            <td>{{ sample.contributor }}</td>
+            <td>{{ sample.created_at }}</td> 
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <h4>該当なし</h4>
+    {% endif %}
+</body>
+</html>
