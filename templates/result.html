@@ -1,6 +1,27 @@
 {% extends 'search.html' %}
 {% block contents %}
 
-{{ df | safe }}
+<h3>「{{ word}}」の検索結果</h3>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">タイトル</th>
+        <th scope="col">チャンネル名</th>
+        <th scope="col">再生回数</th>
+        <th scope="col">サムネイル</th>
+      </tr>
+    </thead>
+    {% for elem in data %} 
+    <tbody>
+      <tr>
+        <td>{{ elem.title }}</td>
+        <td>{{ elem.channel }}</td>
+        <td>{{ elem.viewcount }}</td>
+        <td><img src = "{{ elem.thumbnail }}"></td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
 
 {% endblock %}

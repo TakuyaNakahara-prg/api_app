@@ -4,6 +4,7 @@ from django.views.generic import ListView, View
 from .models import Sample
 from django.db.models import Q
 from . import get_data_api
+import json
 # Create your views here.
 def index(request):
     return HttpResponse("Hello API APP")
@@ -27,10 +28,13 @@ class YoutubeSearchView(View):
         if 'word' in request.GET:
             keyword = request.GET['word']
             youtube_df = get_data_api.youtube_search(keyword)
+            json_record = youtube_df.reset_index().to_json(orient='records')
+            data = []
+            data = json.loads(json_record)
 
             context = {
                     "word":keyword,
-                    'df':youtube_df.to_html(),
+                    'data':data
             }
             print(context)
             return  render(request, 'result.html', context)

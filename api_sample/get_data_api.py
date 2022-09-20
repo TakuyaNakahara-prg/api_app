@@ -15,22 +15,30 @@ def youtube_search(options):
     youtube = build(YOUTUBE_API_SERVICE_NAME, 'v3', developerKey = YOUTUBE_API_KEY)
     search_response = youtube.search().list(part = 'id, snippet', q = options, maxResults = 10, order = 'viewCount', type = 'video',).execute()
 
+    viewcount_list = []
     title_list = []
     channel_list = []
     thumbnail_list = []
+
+
     for search_result in search_response['items']:
-        #viewcount = youtube.videos().list(part = 'statistics', id = search_result['id']['videoId']).execute()
-        #viewcount_list.append(viewcount['items'][0]['statistics']['viewCount'])
+        viewcount = youtube.videos().list(part = 'statistics', id = search_result['id']['videoId']).execute()
+        viewcount_list.append(viewcount['items'][0]['statistics']['viewCount'] + '回')
         title_list.append(search_result['snippet']['title']) 
         channel_list.append(search_result['snippet']['channelTitle'])
         thumbnail_list.append(search_result['snippet']['thumbnails']['default']['url'])
 
+
         df = pd.DataFrame({
-            'タイトル':title_list,
-            'チャンネル名':channel_list,
-            'サムネイル':thumbnail_list,
+            'title':title_list,
+            'channel':channel_list,
+            'viewcount':viewcount_list,
+            'thumbnail':thumbnail_list,
         })
+
     return df
+
+
 
 if __name__ == "__main__":
     word = input('キーワードを入力')

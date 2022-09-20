@@ -1,0 +1,11 @@
+.header-area h1 {
+    font-family: "メイリオ";
+}
+
+.header-area a {
+    color: black;
+}
+
+.header-area a:hover {
+    color: black;
+}
