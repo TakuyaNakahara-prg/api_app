@@ -1,27 +1,32 @@
 {% extends 'search.html' %}
+{% load static %}
+
 {% block contents %}
+<div class = "main-container">
+    <h3>「{{ word}}」の検索結果</h3>
 
-<h3>「{{ word}}」の検索結果</h3>
-
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">タイトル</th>
-        <th scope="col">チャンネル名</th>
-        <th scope="col">再生回数</th>
-        <th scope="col">サムネイル</th>
-      </tr>
-    </thead>
-    {% for elem in data %} 
-    <tbody>
-      <tr>
-        <td>{{ elem.title }}</td>
-        <td>{{ elem.channel }}</td>
-        <td>{{ elem.viewcount }}</td>
-        <td><img src = "{{ elem.thumbnail }}"></td>
-      </tr>
-    </tbody>
-    {% endfor %}
-  </table>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">タイトル</th>
+            <th scope="col">チャンネル名</th>
+            <th scope="col">再生回数</th>
+            <th scope="col">サムネイル</th>
+        </tr>
+        </thead>
+        {% for elem in data %} 
+        <tbody>
+        <tr>
+            <td class = 'elem'><a href = 'http://www.youtube.com/v/{{ elem.videoid }}' style = 'text-decoration: none'>
+                {{ elem.title | truncatechars:30 }}</a></td>
+            <td class = 'elem'>{{ elem.channel }}</td>
+            <td class = 'elem'>{{ elem.viewcount }}</td>
+            <td><a href = 'http://www.youtube.com/v/{{ elem.videoid }}'>
+                <img src = "{{ elem.thumbnail }}"></a></td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
 
 {% endblock %}

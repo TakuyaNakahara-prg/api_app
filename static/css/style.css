@@ -9,3 +9,30 @@
 .header-area a:hover {
     color: black;
 }
+
+body {
+    text-align: center;
+}
+
+.main-container {
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.elem {
+    margin: 0 auto;
+}
+.elem a {
+    color: black;
+}
+.elem a:hover {
+    background-color: azure;
+}
+
+.form_control {
+    width: 30%;
+    height: 40px;
+    border-radius: 1rem;
+}

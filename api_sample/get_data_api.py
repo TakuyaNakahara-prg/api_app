@@ -19,6 +19,7 @@ def youtube_search(options):
     title_list = []
     channel_list = []
     thumbnail_list = []
+    videoid = []
 
 
     for search_result in search_response['items']:
@@ -27,6 +28,7 @@ def youtube_search(options):
         title_list.append(search_result['snippet']['title']) 
         channel_list.append(search_result['snippet']['channelTitle'])
         thumbnail_list.append(search_result['snippet']['thumbnails']['default']['url'])
+        videoid.append(search_result['id']['videoId']) 
 
 
         df = pd.DataFrame({
@@ -34,6 +36,7 @@ def youtube_search(options):
             'channel':channel_list,
             'viewcount':viewcount_list,
             'thumbnail':thumbnail_list,
+            'videoid':videoid
         })
 
     return df
@@ -42,4 +45,4 @@ def youtube_search(options):
 
 if __name__ == "__main__":
     word = input('キーワードを入力')
-    print(youtube_search(word))
+    #print(youtube_search(word))

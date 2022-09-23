@@ -16,9 +16,10 @@
     </header>
     <form action='' method = 'get' onsubmit='doSomething();return false;'>
         {% csrf_token %}
-        <input type="text" name="word" value='{{ word }}'>
-        <input type='submit' value="検索する">
+        <input type="text" class = 'form_control' name="word" placeholder = 'キーワードを入力してください' value='{{ word }}'>
+        <input type='submit'class = 'btn btn-primary' value="検索する">
     </form>
+    
     {% block contents %}
     {% endblock %}
 </body>
